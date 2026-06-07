@@ -1,26 +1,162 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bank-bg: #050505;
+  --color-bank-dark: #0A0E17;
+  --color-bank-gold: #D4AF37;
+  --color-bank-gold-light: #F5D77F;
+  --color-bank-[#043927]: #043927;
+  --color-bank-[#00FF88]: #00FF88;
+  --color-bank-silver: #C0C0C0;
+  --color-bank-white: #FFFFFF;
+
+  --font-jakarta: var(--font-jakarta);
+  --font-mono-code: var(--font-mono-code);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #050505;
+  --foreground: #FFFFFF;
+  --font-heading: var(--font-mono-code);
+  --font-body: var(--font-jakarta);
+  --font-data: var(--font-mono-code);
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 18px; /* Increases overall font scale site-wide */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Hide scrollbar for Chrome, Safari, Edge and Opera while keeping scroll active */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), system-ui, sans-serif;
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-height: 100vh;
+  width: 100vw;
+  user-select: none;
+  font-size: 1rem;
+  line-height: 1.6;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: var(--font-heading), monospace, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+code, pre, .font-mono-code {
+  font-family: var(--font-data), monospace;
+}
+
+/* Fast Hardware-Accelerated Asset Card Styling */
+.glass-card {
+  background: rgba(12, 16, 26, 0.88);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  will-change: transform;
+  transform: translateZ(0);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow: 0 6px 24px rgba(212, 175, 55, 0.25);
+}
+
+/* Premium Button Glow */
+.gold-button-glow {
+  background: linear-gradient(135deg, #D4AF37 0%, #B38F24 100%);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  will-change: transform;
+}
+
+.gold-button-glow:hover {
+  box-shadow: 0 0 35px rgba(212, 175, 55, 0.55);
+  transform: scale(1.03);
+}
+
+/* Premium Input Border Glow */
+.gold-input {
+  background: rgba(10, 14, 23, 0.85);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gold-input:focus {
+  border-color: #D4AF37;
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.35);
+}
+
+/* Infinite Horizontal Marquee Animations */
+@keyframes marquee-left {
+  0% {
+    transform: translate3d(0%, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes marquee-right {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0%, 0, 0);
+  }
+}
+
+.animate-marquee-left {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: marquee-left 35s linear infinite;
+}
+
+.animate-marquee-right {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: marquee-right 70s linear infinite;
+}
+
+/* Soft Scanning Spotlight Beam */
+@keyframes spotlight-scan {
+  0%, 100% {
+    transform: translate3d(-30%, -20%, 0) rotate(-10deg);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translate3d(30%, 20%, 0) rotate(10deg);
+    opacity: 0.35;
+  }
+}
+
+.animate-spotlight {
+  animation: spotlight-scan 16s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Faint Financial Grid Pattern */
+.bg-financial-grid {
+  background-size: 60px 60px;
+  background-image: 
+    linear-gradient(to right, rgba(212, 175, 55, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(212, 175, 55, 0.04) 1px, transparent 1px);
 }
