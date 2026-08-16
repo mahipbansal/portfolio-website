@@ -281,8 +281,8 @@ export default function PenguinCompanion() {
         isMovingRef.current = true;
         isSittingRef.current = false;
 
-        // Snappy Waddling Speed
-        const moveSpeed = Math.min(1.8, Math.max(0.9, dist * 0.025));
+        // Snappy Waddling Speed (Faster follow pace)
+        const moveSpeed = Math.min(3.2, Math.max(1.6, dist * 0.045));
         posRef.current.x += (dx / dist) * moveSpeed;
         posRef.current.y += (dy / dist) * moveSpeed;
 
@@ -411,7 +411,7 @@ export default function PenguinCompanion() {
       const isHappyState = happyTimerRef.current > 0;
 
       // Snappy Waddling & Breathing Animation Cycles
-      const waddleCycle = Math.sin(frameRef.current * 0.22);
+      const waddleCycle = Math.sin(frameRef.current * 0.28);
       const breathCycle = Math.sin(frameRef.current * 0.06) * 1.2;
       
       const bodyYOffset = isSitting ? 3 : isWalking ? Math.abs(waddleCycle) * -2.2 : breathCycle;

@@ -18,6 +18,10 @@ export interface ProjectAsset {
   githubUrl?: string;
   demoUrl?: string;
   image?: string;
+  color: string;
+  glowColor: string;
+  borderColor: string;
+  bgGradient: string;
 }
 
 export const PROJECT_ASSETS: ProjectAsset[] = [
@@ -32,55 +36,63 @@ export const PROJECT_ASSETS: ProjectAsset[] = [
     marketSignal: '↗ ACTIVE',
     technologies: ['Next.js', 'Python', 'AI / RAG', 'PostgreSQL', 'Tailwind CSS'],
     sparklineData: [10, 16, 26, 42, 64, 88, 110],
-    tagline: 'Resume to portfolio generator — AI resumes, cover letters, resume insights, live portfolio deployment & jobs matching (in dev).',
+    tagline: 'Transforms resumes into deployed portfolios, AI cover letters & career insights.',
     executiveSummary:
-      'LinkLift transforms resumes into live deployed portfolios, generates AI-tailored resumes, cover letters, and deep resume insights. Integrated AI jobs matching engine currently under development.',
+      'Automates portfolio creation and career collateral by parsing resumes into live web subdomains and tailored application documents.',
     problemStatement:
-      'Job seekers waste hours manually building portfolios, writing custom cover letters, and formatting resumes for distinct job roles.',
+      'Job seekers waste dozens of manual hours formatting portfolios and tailoring application documents for distinct roles.',
     solution:
-      'Engineered an autonomous AI engine that parses resume PDFs, generates custom portfolios deployed directly to web subdomains, and creates AI cover letters and resume insights.',
+      'Autonomous AI engine parsing PDF resumes to deploy custom subdomains, tailored cover letters, and deep ATS insights.',
     architecture:
-      'Next.js 15 App Router frontend paired with a Python FastAPI microservice architecture backed by PostgreSQL database and Vercel edge deployment.',
+      'Next.js 15 App Router paired with Python FastAPI microservices and PostgreSQL edge infrastructure.',
     challenges:
       'Optimizing PDF parsing extraction accuracy and zero-latency live portfolio code generation.',
     impact: [
-      'Instant live portfolio deployment',
-      'AI cover letter & resume insights generation',
-      'Integrated jobs matching engine (under dev)'
+      'Instant subdomain portfolio deployment',
+      'AI cover letter & resume insights engine',
+      'Automated job matching system (under dev)'
     ],
     githubUrl: 'https://github.com/mahipbansal/LinkLift',
-    demoUrl: 'https://link-lift.vercel.app'
+    demoUrl: 'https://link-lift.vercel.app',
+    color: '#00E5FF',
+    glowColor: 'rgba(0, 229, 255, 0.45)',
+    borderColor: 'border-cyan-400/40',
+    bgGradient: 'from-cyan-950/50 via-slate-900/40 to-slate-950/80',
   },
 
-  // ASSET // 02: PA Roxxx OS
+  // ASSET // 02: Nova
   {
     id: 'nova-os',
     assetNumber: 'ASSET // 02',
-    name: 'PA Roxxx OS (Nova)',
+    name: 'Nova',
     subtitle: 'All-in-One Executive Assistant OS',
     sector: 'Executive Productivity OS',
     status: 'ACTIVE',
     marketSignal: '↗ ACTIVE',
     technologies: ['Next.js 15', 'TypeScript', 'Node.js', 'PostgreSQL', 'AI Agents', 'WebSockets', 'Tailwind CSS'],
     sparklineData: [12, 24, 45, 68, 92, 120],
-    tagline: 'All-in-one personal assistant platform managing notes, tasks, health, finance, emails, projects & personal goals.',
+    tagline: 'Unified executive workspace managing notes, tasks, health, finance, emails & goals.',
     executiveSummary:
-      'PA Roxxx OS is a unified executive operating system that eliminates app-switching friction by consolidating daily notes, task queues, health metrics, financial portfolios, AI email triage, project milestones, and personal goals into a single intelligent dashboard.',
+      'Consolidates 7 daily productivity modules into a single intelligent dashboard to eliminate context-switching friction.',
     problemStatement:
-      'Executives and power creators waste up to 2 hours daily context-switching across 7+ fragmented tools for notes, finance tracking, health logs, email triage, and goal management.',
+      'Executives waste up to 2 hours daily context-switching across fragmented tools for notes, tasks, finance, and email.',
     solution:
-      'Engineered an all-in-one personal assistant platform with background AI triage workers, unified PostgreSQL state management, live WebSocket telemetry, and automated task priorities.',
+      'Integrated workspace with real-time WebSocket feeds, background AI triage workers, and unified state management.',
     architecture:
-      'Next.js 15 App Router with TypeScript frontend, PostgreSQL user data store, real-time WebSocket event bus for finance/health feeds, and background AI workers for inbox & task triage.',
+      'Next.js 15 App Router, TypeScript, PostgreSQL state layer, WebSockets event bus, and AI triage workers.',
     challenges:
-      'Synthesizing 7 complex domain modules (Notes, Finance, Health, Email, Tasks, Projects, Goals) into a single zero-clutter executive workspace with sub-50ms tab switching.',
+      'Synthesizing 7 complex modules into a zero-clutter workspace with sub-50ms tab switching.',
     impact: [
-      '7-in-1 consolidated executive operating system workspace',
-      'Automated real-time email & task AI triage engine',
-      'Unified live tracking for finance, health & personal goals'
+      '7-in-1 consolidated executive workspace',
+      'Automated AI email & task triage engine',
+      'Real-time telemetry for finance & health goals'
     ],
     githubUrl: 'https://github.com/mahipbansal/Nova',
-    demoUrl: 'https://nova-os-mahip.vercel.app/'
+    demoUrl: 'https://nova-os-mahip.vercel.app/',
+    color: '#FFB800',
+    glowColor: 'rgba(255, 184, 0, 0.45)',
+    borderColor: 'border-amber-400/40',
+    bgGradient: 'from-amber-950/50 via-slate-900/40 to-slate-950/80',
   },
 
   // ASSET // 03: JARVIS
@@ -94,23 +106,27 @@ export const PROJECT_ASSETS: ProjectAsset[] = [
     marketSignal: '↗ ACTIVE',
     technologies: ['Python', 'LLMs', 'PyTorch', 'FastAPI', 'LangChain', 'WebSockets'],
     sparklineData: [15, 32, 60, 95, 135, 180],
-    tagline: 'Autonomous multi-modal AI voice assistant capable of multi-step task execution & desktop automation.',
+    tagline: 'Multi-modal AI assistant executing system tasks, desktop automation & voice commands.',
     executiveSummary:
-      'JARVIS is an advanced stateful LLM agent framework designed for automated code generation, complex environment control, voice commands, and self-correcting workflow execution loops.',
+      'Stateful LLM agent framework built for automated task execution, system control, and self-correcting workflows.',
     problemStatement:
-      'Standard conversational AI models lack persistent memory state and active tool-execution capabilities in real-time developer workflows.',
+      'Standard LLMs lack persistent memory, real-time system interaction, and multi-turn execution tools.',
     solution:
-      'Built a stateful agentic system equipped with tool-calling capabilities, short/long-term memory buffer, voice interaction, and dynamic self-reflection loops.',
+      'Event-driven agent with tool execution, short/long-term memory buffer, voice interface, and dynamic self-reflection.',
     architecture:
-      'Event-driven Python architecture utilizing LangChain, custom PyTorch embeddings, WebSockets stream synchronization, and Docker sandbox execution containers.',
+      'Python microservice with PyTorch embeddings, WebSockets streaming, LangChain agents, and sandboxed execution.',
     challenges:
       'Preventing context window degradation and managing multi-turn agent hallucinations during autonomous execution loops.',
     impact: [
-      '88% task completion rate without human intervention',
-      '< 1.2s response time for tool execution',
-      'Integrated with 25+ external APIs'
+      '88% autonomous task completion rate',
+      '< 1.2s rapid tool-execution response',
+      'Integrated with 25+ external developer APIs'
     ],
-    githubUrl: 'https://github.com/mahipbansal/Jarvis-Personal-Assistant-Bot'
+    githubUrl: 'https://github.com/mahipbansal/Jarvis-Personal-Assistant-Bot',
+    color: '#00FF9D',
+    glowColor: 'rgba(0, 255, 157, 0.45)',
+    borderColor: 'border-emerald-400/40',
+    bgGradient: 'from-emerald-950/50 via-slate-900/40 to-slate-950/80',
   },
 
   // ASSET // 04: Future Project 01
@@ -124,22 +140,26 @@ export const PROJECT_ASSETS: ProjectAsset[] = [
     marketSignal: '→ PLANNED',
     technologies: ['AI Architecture', 'R&D Modeling', 'System Design'],
     sparklineData: [10, 10, 10, 10, 10, 10],
-    tagline: '',
+    tagline: 'Next-gen hybrid local/cloud multi-agent orchestration architecture.',
     executiveSummary:
-      'A stealth R&D initiative exploring novel multi-agent orchestration architectures and local zero-latency vector execution engines.',
+      'Exploring local-first hybrid model routing to achieve zero-latency multi-agent reasoning cycles.',
     problemStatement:
-      'Current multi-agent frameworks incur high cloud API latencies and token costs during autonomous multi-step reasoning cycles.',
+      'High cloud API latencies and token costs bottleneck multi-step autonomous agent workflows.',
     solution:
-      'Designing a local-first hybrid model routing architecture combining quantized local SLMs with high-capacity cloud LLMs.',
+      'Routing queries between quantized local SLMs for instant execution and cloud LLMs for complex reasoning.',
     architecture:
-      'Conceptual architecture combining Rust local execution daemons with event-driven WebSockets telemetry.',
+      'Rust local execution daemons paired with WebSockets event telemetry.',
     challenges:
       'Optimizing dynamic token routing thresholds between edge and cloud LLM models.',
     impact: [
-      'In initial R&D conceptual architecture phase',
       'Targeting sub-20ms local routing decisions',
-      'Zero-cloud fallback execution mode'
-    ]
+      'Zero-cloud fallback execution mode',
+      'Hybrid local SLM + cloud LLM pipeline'
+    ],
+    color: '#E086FF',
+    glowColor: 'rgba(224, 134, 255, 0.45)',
+    borderColor: 'border-purple-400/40',
+    bgGradient: 'from-purple-950/50 via-slate-900/40 to-slate-950/80',
   },
 
   // ASSET // 05: Future Project 02
@@ -153,21 +173,29 @@ export const PROJECT_ASSETS: ProjectAsset[] = [
     marketSignal: '→ PLANNED',
     technologies: ['C++', 'Distributed IPC', 'Quant & AI'],
     sparklineData: [10, 10, 10, 10, 10, 10],
-    tagline: '',
+    tagline: 'Ultra-low latency inter-process communication protocol.',
     executiveSummary:
-      'An exploratory research protocol focused on ultra-low latency inter-process communication for autonomous trading kernels.',
+      'Research protocol building shared-memory IPC ring buffers for real-time neural inference kernels.',
     problemStatement:
-      'Traditional IPC messaging bottlenecks during microsecond-level market tick bursts.',
+      'Traditional IPC messaging creates severe latency bottlenecks during high-frequency data bursts.',
     solution:
-      'Building shared memory IPC ring buffers in C++ for zero-copy message passing between neural inference modules.',
+      'C++ lock-free shared memory queues for zero-copy message passing between system modules.',
     architecture:
-      'C++ 20 shared memory execution kernel with lock-free lockless queues.',
+      'C++20 shared-memory kernel with lockless queue buffers.',
     challenges:
       'Eliminating CPU thread contention during high-frequency volatility spikes.',
     impact: [
-      'In early research & design phase',
-      'Targeting microsecond IPC latency',
-      'Lockless shared-memory data pipeline'
-    ]
+      'Microsecond IPC message passing latency',
+      'Lock-free zero-copy data architecture',
+      'Designed for high-frequency neural inference'
+    ],
+    color: '#FF4365',
+    glowColor: 'rgba(255, 67, 101, 0.45)',
+    borderColor: 'border-rose-500/40',
+    bgGradient: 'from-rose-950/50 via-slate-900/40 to-slate-950/80',
   }
 ];
+
+
+
+

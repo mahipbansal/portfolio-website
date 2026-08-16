@@ -51,149 +51,178 @@ export default function ProjectModal({ asset, onClose }: ProjectModalProps) {
 
         {/* Modal Window Container */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.94, y: 20 }}
+          initial={{ opacity: 0, scale: 0.95, y: 15 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.94, y: 20 }}
-          transition={{ duration: 0.3, ease: 'easeOut' }}
-          className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-[#0a0d14] border border-[#D4AF37]/30 rounded-2xl shadow-2xl z-10 text-white p-5 sm:p-7 space-y-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+          exit={{ opacity: 0, scale: 0.95, y: 15 }}
+          transition={{ duration: 0.25, ease: 'easeOut' }}
+          className="relative w-full max-w-3xl max-h-[88vh] overflow-y-auto bg-[#080b12] border rounded-2xl z-10 text-white p-5 sm:p-6 space-y-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+          style={{
+            borderColor: `${asset.color}50`,
+            boxShadow: `0 0 35px ${asset.glowColor}`,
+          }}
         >
           {/* Header Bar */}
-          <div className="relative border-b border-[#D4AF37]/20 pb-5">
+          <div className="relative border-b pb-4" style={{ borderColor: `${asset.color}30` }}>
             <button
               onClick={onClose}
-              className="absolute top-0 right-0 p-2 rounded-xl bg-gray-800/80 hover:bg-gray-700 text-gray-300 hover:text-white transition-colors z-10 border border-white/10"
+              className="absolute top-0 right-0 p-1.5 rounded-xl bg-gray-800/80 hover:bg-gray-700 text-gray-300 hover:text-white transition-colors z-10 border border-white/10"
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4" />
             </button>
 
-            <div className="flex flex-col lg:flex-row justify-between items-start gap-6 pr-12">
-              {/* Left Column: Title and Actions */}
-              <div className="space-y-2 max-w-xl">
-                <div className="flex items-center space-x-3">
-                  <span className="text-[#D4AF37] font-mono text-xs tracking-widest uppercase font-bold">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pr-10">
+              <div className="space-y-1 max-w-lg">
+                <div className="flex items-center space-x-2.5">
+                  <span
+                    className="font-mono text-[10px] tracking-widest uppercase font-extrabold px-2 py-0.5 rounded border"
+                    style={{
+                      color: asset.color,
+                      borderColor: `${asset.color}40`,
+                      backgroundColor: `${asset.color}15`,
+                    }}
+                  >
                     {asset.assetNumber}
                   </span>
-                  <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold ${
+                  <span className={`px-2 py-0.5 rounded-full text-[10px] font-mono font-bold ${
                     isActive
                       ? 'bg-[#00E676]/15 text-[#00E676] border border-[#00E676]/30'
                       : 'bg-[#FF3D57]/15 text-[#FF3D57] border border-[#FF3D57]/30'
                   }`}>
                     {asset.status}
                   </span>
+                  <span className="text-[10px] font-mono text-gray-400 font-medium">
+                    {asset.sector}
+                  </span>
                 </div>
-                <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-tight">
+
+                <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight text-white leading-tight">
                   {asset.name}
                 </h2>
-                <p className="text-gray-300 text-xs sm:text-sm font-mono leading-relaxed">{asset.tagline}</p>
-                
-                {/* Action Buttons */}
-                <div className="flex items-center space-x-3 pt-3">
-                  {asset.githubUrl && (
-                    <a
-                      href={asset.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 border border-white/15 text-white font-mono text-xs font-semibold transition-all hover:scale-[1.02]"
-                    >
-                      <GithubIcon className="w-4 h-4" />
-                      <span>GitHub Code</span>
-                    </a>
-                  )}
-
-                  {asset.demoUrl && (
-                    <a
-                      href={asset.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-gradient-to-r from-[#D4AF37] to-[#B38F2D] hover:from-[#E5C148] hover:to-[#C4A03E] text-black font-mono text-xs font-bold transition-all hover:scale-[1.02] shadow-lg shadow-[#D4AF37]/20"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                      <span>Live Demo</span>
-                    </a>
-                  )}
-                </div>
+                <p className="text-gray-300 text-xs font-mono leading-relaxed">{asset.tagline}</p>
               </div>
 
-              {/* Right Column: Clean Metadata Cards */}
-              <div className="grid grid-cols-2 gap-3 p-4 rounded-xl bg-[#05070c] border border-[#D4AF37]/20 w-full lg:w-auto shrink-0 font-mono text-xs">
-                <div className="space-y-1">
-                  <span className="text-[10px] text-gray-400 uppercase tracking-wider block font-medium">Domain / Sector</span>
-                  <p className="font-bold text-white text-xs">{asset.sector}</p>
-                </div>
-                <div className="space-y-1">
-                  <span className="text-[10px] text-gray-400 uppercase tracking-wider block font-medium">Market Signal</span>
-                  <p className="font-bold text-[#00E676] text-xs flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#00E676] animate-pulse" />
-                    {asset.marketSignal}
-                  </p>
-                </div>
+              {/* Action Buttons */}
+              <div className="flex items-center space-x-2.5 shrink-0">
+                {asset.githubUrl && (
+                  <a
+                    href={asset.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-gray-800 hover:bg-gray-700 border border-white/15 text-white font-mono text-xs font-semibold transition-all hover:scale-[1.02]"
+                  >
+                    <GithubIcon className="w-3.5 h-3.5" />
+                    <span>GitHub</span>
+                  </a>
+                )}
+
+                {asset.demoUrl && (
+                  <a
+                    href={asset.demoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center space-x-1.5 px-3.5 py-1.5 rounded-lg text-black font-mono text-xs font-extrabold transition-all hover:scale-[1.02]"
+                    style={{
+                      backgroundColor: asset.color,
+                      boxShadow: `0 0 12px ${asset.glowColor}`,
+                    }}
+                  >
+                    <ExternalLink className="w-3.5 h-3.5" />
+                    <span>Live Demo</span>
+                  </a>
+                )}
               </div>
             </div>
           </div>
 
-          {/* Core Content Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Left Column: Executive Summary & Problem & Solution */}
-            <div className="space-y-5">
-              <div className="space-y-1.5">
-                <h3 className="text-xs font-mono text-[#D4AF37] uppercase tracking-wider flex items-center gap-2 font-bold">
-                  <Award className="w-4 h-4 text-[#D4AF37]" /> Executive Overview
-                </h3>
-                <p className="text-gray-300 text-xs sm:text-sm font-mono leading-relaxed">{asset.executiveSummary}</p>
-              </div>
+          {/* Executive Overview Highlight Banner */}
+          <div
+            className="p-3.5 sm:p-4 rounded-xl border border-white/10 bg-black/40 flex items-start gap-3"
+            style={{ borderLeftColor: asset.color, borderLeftWidth: '4px' }}
+          >
+            <Award className="w-5 h-5 shrink-0 mt-0.5" style={{ color: asset.color }} />
+            <div className="space-y-0.5">
+              <span className="text-[10px] font-mono uppercase tracking-wider block font-bold" style={{ color: asset.color }}>
+                EXECUTIVE OVERVIEW
+              </span>
+              <p className="text-gray-200 text-xs sm:text-sm font-mono leading-relaxed">
+                {asset.executiveSummary}
+              </p>
+            </div>
+          </div>
 
-              <div className="space-y-1.5">
-                <h3 className="text-xs font-mono text-[#FF3D57] uppercase tracking-wider flex items-center gap-2 font-bold">
-                  <ShieldCheck className="w-4 h-4 text-[#FF3D57]" /> Problem Statement
-                </h3>
-                <p className="text-gray-300 text-xs sm:text-sm font-mono leading-relaxed">{asset.problemStatement}</p>
-              </div>
-
-              <div className="space-y-1.5">
-                <h3 className="text-xs font-mono text-[#00E676] uppercase tracking-wider flex items-center gap-2 font-bold">
-                  <TrendingUp className="w-4 h-4 text-[#00E676]" /> Architectural Solution
-                </h3>
-                <p className="text-gray-300 text-xs sm:text-sm font-mono leading-relaxed">{asset.solution}</p>
-              </div>
+          {/* Problem & Solution 2-Column Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            {/* The Challenge */}
+            <div className="bg-[#FF3D57]/08 border border-[#FF3D57]/25 p-3.5 rounded-xl space-y-1">
+              <h4 className="text-xs font-mono text-[#FF3D57] font-bold uppercase flex items-center gap-1.5">
+                <ShieldCheck className="w-4 h-4 text-[#FF3D57]" /> The Challenge
+              </h4>
+              <p className="text-gray-300 text-xs font-mono leading-relaxed">
+                {asset.problemStatement}
+              </p>
             </div>
 
-            {/* Right Column: Architecture & Impact */}
-            <div className="space-y-5">
-              <div className="space-y-1.5">
-                <h3 className="text-xs font-mono text-cyan-400 uppercase tracking-wider flex items-center gap-2 font-bold">
-                  <Layers className="w-4 h-4 text-cyan-400" /> System Topology & Architecture
-                </h3>
-                <p className="text-gray-300 text-xs sm:text-sm font-mono leading-relaxed">{asset.architecture}</p>
-              </div>
+            {/* The Solution */}
+            <div className="bg-[#00E676]/08 border border-[#00E676]/25 p-3.5 rounded-xl space-y-1">
+              <h4 className="text-xs font-mono text-[#00E676] font-bold uppercase flex items-center gap-1.5">
+                <TrendingUp className="w-4 h-4 text-[#00E676]" /> Architectural Solution
+              </h4>
+              <p className="text-gray-300 text-xs font-mono leading-relaxed">
+                {asset.solution}
+              </p>
+            </div>
+          </div>
 
-              <div className="space-y-1.5">
-                <h3 className="text-xs font-mono text-[#D4AF37] uppercase tracking-wider flex items-center gap-2 font-bold">
-                  <Cpu className="w-4 h-4 text-[#D4AF37]" /> Key Impact & Deliverables
-                </h3>
-                <ul className="space-y-1.5 font-mono text-xs text-gray-300">
-                  {asset.impact.map((item, idx) => (
-                    <li key={idx} className="flex items-center space-x-2">
-                      <span className="text-[#00E676] font-bold">✓</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+          {/* Architecture & Deliverables 2-Column Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            {/* System Topology */}
+            <div className="bg-cyan-950/20 border border-cyan-500/25 p-3.5 rounded-xl space-y-1">
+              <h4 className="text-xs font-mono text-cyan-400 font-bold uppercase flex items-center gap-1.5">
+                <Layers className="w-4 h-4 text-cyan-400" /> System Topology
+              </h4>
+              <p className="text-gray-300 text-xs font-mono leading-relaxed">
+                {asset.architecture}
+              </p>
+            </div>
 
-              {/* Technologies */}
-              <div className="space-y-2 pt-2 border-t border-white/10">
-                <h3 className="text-[10px] font-mono text-gray-400 uppercase tracking-wider font-semibold">Technology Stack</h3>
-                <div className="flex flex-wrap gap-1.5">
-                  {asset.technologies.map((tech, idx) => (
-                    <span
-                      key={idx}
-                      className="px-2.5 py-1 text-[10px] font-mono rounded-md bg-[#080b12] border border-white/15 text-gray-200"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
+            {/* Key Deliverables & Impact */}
+            <div className="bg-white/5 border border-white/10 p-3.5 rounded-xl space-y-1">
+              <h4
+                className="text-xs font-mono font-bold uppercase flex items-center gap-1.5"
+                style={{ color: asset.color }}
+              >
+                <Cpu className="w-4 h-4" style={{ color: asset.color }} /> Key Impact & Deliverables
+              </h4>
+              <ul className="space-y-1 font-mono text-xs text-gray-300">
+                {asset.impact.map((item, idx) => (
+                  <li key={idx} className="flex items-center gap-1.5">
+                    <span className="text-[#00E676] font-bold">✓</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Technology Stack Footer */}
+          <div className="pt-2 border-t border-white/10 space-y-1.5">
+            <span className="text-[10px] font-mono text-gray-400 uppercase tracking-wider font-semibold block">
+              TECHNOLOGY STACK
+            </span>
+            <div className="flex flex-wrap gap-1.5">
+              {asset.technologies.map((tech, idx) => (
+                <span
+                  key={idx}
+                  className="px-2.5 py-0.5 text-[11px] font-mono font-bold rounded-md border"
+                  style={{
+                    color: asset.color,
+                    backgroundColor: `${asset.color}15`,
+                    borderColor: `${asset.color}35`,
+                  }}
+                >
+                  {tech}
+                </span>
+              ))}
             </div>
           </div>
 
@@ -202,3 +231,5 @@ export default function ProjectModal({ asset, onClose }: ProjectModalProps) {
     </AnimatePresence>
   );
 }
+
+

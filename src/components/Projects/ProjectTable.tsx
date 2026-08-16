@@ -12,7 +12,7 @@ export default function ProjectTable({ onSelect }: ProjectTableProps) {
   return (
     <div className="flex-1 flex flex-col h-full overflow-hidden">
       {/* Table Body - Flexible on mobile, compact scroll container on desktop */}
-      <div className="flex-1 max-h-none sm:max-h-[400px] overflow-y-auto overflow-x-hidden p-1 pr-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+      <div className="flex-1 max-h-none sm:max-h-[520px] overflow-y-auto overflow-x-hidden p-3 sm:p-4 space-y-3.5 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
         {PROJECT_ASSETS.map((asset, idx) => (
           <ProjectRow
             key={asset.id}
@@ -25,3 +25,4 @@ export default function ProjectTable({ onSelect }: ProjectTableProps) {
     </div>
   );
 }
+

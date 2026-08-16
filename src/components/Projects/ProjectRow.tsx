@@ -19,14 +19,6 @@ const ASSET_ICONS: Record<string, React.ElementType> = {
   'future-project-2': Code2,
 };
 
-const PROJECT_ICON_COLORS: Record<string, string> = {
-  'link-lift': 'text-[#38BDF8] filter drop-shadow-[0_0_8px_rgba(56,189,248,0.5)]',
-  'nova-os': 'text-purple-400 filter drop-shadow-[0_0_8px_rgba(168,85,247,0.5)]',
-  'jarvis': 'text-[#00E676] filter drop-shadow-[0_0_8px_rgba(0,230,118,0.5)]',
-  'future-project-1': 'text-[#D4AF37] filter drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]',
-  'future-project-2': 'text-slate-400 filter drop-shadow-[0_0_8px_rgba(148,163,184,0.4)]',
-};
-
 interface ProjectRowProps {
   asset: ProjectAsset;
   onSelect: (asset: ProjectAsset) => void;
@@ -37,7 +29,6 @@ export default function ProjectRow({ asset, onSelect, delay }: ProjectRowProps) 
   const [isHovered, setIsHovered] = useState(false);
   const Icon = ASSET_ICONS[asset.id] || Wand2;
 
-  // Color-coded status indicator dot & text badge
   const isGreen = asset.status === 'ACTIVE';
   const isRed = asset.status === 'UNDER CONSTRUCTION';
   const isFuture = asset.status === 'FUTURE VISION';
@@ -47,100 +38,154 @@ export default function ProjectRow({ asset, onSelect, delay }: ProjectRowProps) 
   return (
     <motion.div
       initial={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-      className={`relative group border-b border-[#222] transition-colors ${
-        isFuture ? 'cursor-default opacity-85' : 'hover:border-[#D4AF37]/50 cursor-pointer'
+      transition={{ duration: 0.3, delay }}
+      className={`relative group rounded-xl border transition-all duration-300 overflow-hidden ${
+        asset.borderColor
+      } bg-gradient-to-br ${asset.bgGradient} ${
+        isFuture ? 'cursor-default opacity-85' : 'cursor-pointer'
       }`}
+      style={{
+        boxShadow: isHovered && !isFuture
+          ? `0 0 20px ${asset.glowColor}`
+          : `0 0 10px ${asset.glowColor.replace('0.4', '0.12')}`,
+      }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={() => {
         if (!isFuture) onSelect(asset);
       }}
     >
-      <div className={`flex flex-col sm:flex-row sm:items-center justify-between gap-3 py-3.5 sm:py-4.5 px-4 sm:px-5 min-h-[86px] transition-colors duration-300 ${isHovered && !isFuture ? 'bg-[#D4AF37]/5' : ''}`}>
-        
-        {/* Left: Frameless Colored Project Icon, Status Dot + Name, & Description */}
-        <div className="flex items-start sm:items-center space-x-3 sm:space-x-4 min-w-0 flex-1">
-          {/* Frameless Pure Icon */}
-          <div className="shrink-0 flex items-center justify-center p-1 pt-0.5 sm:pt-1">
-            {isFuture ? (
-              <Lock className="w-5 h-5 text-gray-500" />
-            ) : (
-              <Icon className={`w-5.5 h-5.5 transition-transform duration-300 group-hover:scale-115 ${PROJECT_ICON_COLORS[asset.id] || 'text-[#D4AF37]'}`} />
-            )}
-          </div>
-
-          <div className="flex flex-col justify-center min-w-0 space-y-0.5 flex-1">
-            {/* Title Row with Status Indicator Dot before Name */}
-            <div className="flex items-center space-x-2.5">
-              {/* Pulsing Status Dot */}
-              <span className="relative flex h-2.5 w-2.5 shrink-0" title={`Status: ${asset.status}`}>
-                <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${dotColorClass}`} />
-                <span className={`relative inline-flex rounded-full h-2.5 w-2.5 ${dotColorClass}`} />
-              </span>
-
-              {/* Project Name */}
-              <span className="font-mono font-extrabold text-white text-sm sm:text-base tracking-tight break-words">
-                {asset.name}
-              </span>
+      <div className="flex flex-col gap-3 p-4 sm:p-5">
+        {/* Top Header Row: Icon, Asset Info, Status & Action Icons */}
+        <div className="flex items-start justify-between gap-3">
+          
+          <div className="flex items-center space-x-3.5 min-w-0 flex-1">
+            {/* Styled Icon Container matching Profile Section DP Node buttons */}
+            <div
+              className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border transition-all duration-300 bg-black/60 shadow-inner"
+              style={{
+                borderColor: `${asset.color}60`,
+                backgroundColor: `${asset.color}15`,
+              }}
+            >
+              {isFuture ? (
+                <Lock className="w-5 h-5 text-gray-400" />
+              ) : (
+                <Icon
+                  className="w-5 h-5 transition-transform duration-300 group-hover:scale-110"
+                  style={{
+                    color: asset.color,
+                    filter: `drop-shadow(0 0 8px ${asset.color})`,
+                  }}
+                />
+              )}
             </div>
 
-            {/* Subtitle / Description */}
-            {asset.tagline ? (
-              <p className="text-gray-400 text-xs font-mono leading-relaxed font-normal sm:line-clamp-1">
-                {asset.tagline}
-              </p>
-            ) : (
-              <p className="text-gray-400 text-xs font-mono tracking-wide flex items-center gap-1.5 font-normal flex-wrap">
-                <span className="text-[#D4AF37]/80">⚡</span> {asset.subtitle} • {asset.sector}
-              </p>
+            {/* Asset Header Titles */}
+            <div className="flex flex-col min-w-0 space-y-1">
+              <div className="flex items-center space-x-2 flex-wrap gap-y-1">
+                {/* Asset Number Badge */}
+                <span
+                  className="text-[10px] font-mono font-extrabold px-2 py-0.5 rounded border uppercase tracking-wider"
+                  style={{
+                    color: asset.color,
+                    borderColor: `${asset.color}40`,
+                    backgroundColor: `${asset.color}18`,
+                  }}
+                >
+                  {asset.assetNumber}
+                </span>
+
+                {/* Pulsing Status Indicator Dot */}
+                <span className="relative flex h-2 w-2 shrink-0" title={`Status: ${asset.status}`}>
+                  <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${dotColorClass}`} />
+                  <span className={`relative inline-flex rounded-full h-2 w-2 ${dotColorClass}`} />
+                </span>
+
+                {/* Sector Badge */}
+                <span className="text-[10px] font-mono text-gray-300 font-semibold uppercase">
+                  {asset.sector}
+                </span>
+              </div>
+
+              {/* Project Name */}
+              <h3 className="font-mono font-extrabold text-white text-base sm:text-lg tracking-tight truncate group-hover:text-white">
+                {asset.name}
+              </h3>
+            </div>
+          </div>
+
+          {/* Action Symbols (Top Right) */}
+          <div className="flex items-center space-x-2 font-mono text-xs shrink-0 pt-0.5">
+            {asset.demoUrl && (
+              <a
+                href={asset.demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="text-[#00E676] hover:text-[#00E676]/80 hover:scale-115 transition-all p-1.5 rounded-lg bg-black/40 border border-[#00E676]/30 hover:border-[#00E676]"
+                title="Live Demo Platform"
+              >
+                <ExternalLink className="w-4 h-4" />
+              </a>
+            )}
+
+            {asset.githubUrl && (
+              <a
+                href={asset.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="text-slate-300 hover:text-white hover:scale-115 transition-all p-1.5 rounded-lg bg-black/40 border border-white/15 hover:border-white/40"
+                title="GitHub Repository"
+              >
+                <GithubIcon className="w-4 h-4" />
+              </a>
+            )}
+
+            {!isFuture && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onSelect(asset);
+                }}
+                className="p-1.5 rounded-lg bg-black/40 border transition-all hover:scale-115 cursor-pointer"
+                style={{
+                  color: asset.color,
+                  borderColor: `${asset.color}40`,
+                }}
+                title="Project Details"
+              >
+                <FileText className="w-4 h-4" />
+              </button>
             )}
           </div>
+
         </div>
 
-        {/* Right: Action Symbols */}
-        <div className="flex items-center justify-end space-x-3.5 font-mono text-xs shrink-0 self-end sm:self-center pl-8 sm:pl-0 pt-1 sm:pt-0">
-          {/* Live Demo Pure Symbol */}
-          {asset.demoUrl && (
-            <a
-              href={asset.demoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="text-[#00E676] hover:text-[#00E676]/80 hover:scale-115 transition-all p-1"
-              title="Live Demo Platform"
-            >
-              <ExternalLink className="w-5 h-5" />
-            </a>
-          )}
+        {/* Description Tagline */}
+        <p className="text-gray-300 text-xs sm:text-sm font-mono leading-relaxed line-clamp-2">
+          {asset.tagline || `${asset.subtitle} • ${asset.executiveSummary}`}
+        </p>
 
-          {/* GitHub Repo Pure Symbol */}
-          {asset.githubUrl && (
-            <a
-              href={asset.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="text-slate-300 hover:text-white hover:scale-115 transition-all p-1"
-              title="GitHub Repository"
+        {/* Technologies / Skill Stack Badges - Colorful Pill Tags like Profile Section */}
+        <div className="flex flex-wrap gap-1.5 pt-1">
+          {asset.technologies.map((tech, idx) => (
+            <span
+              key={idx}
+              className="text-[11px] px-2.5 py-0.5 rounded-md border font-mono font-bold transition-all duration-300"
+              style={{
+                color: asset.color,
+                backgroundColor: `${asset.color}15`,
+                borderColor: `${asset.color}35`,
+              }}
             >
-              <GithubIcon className="w-5 h-5" />
-            </a>
-          )}
-
-          {/* Details Modal Opener Pure Symbol */}
-          {!isFuture && (
-            <button
-              onClick={() => onSelect(asset)}
-              className="text-[#D4AF37] hover:text-[#e5c158] hover:scale-115 transition-all p-1 cursor-pointer"
-              title="Project Details"
-            >
-              <FileText className="w-5 h-5" />
-            </button>
-          )}
+              {tech}
+            </span>
+          ))}
         </div>
-
       </div>
     </motion.div>
   );
 }
+
