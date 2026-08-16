@@ -1,21 +1,18 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
 import { PROJECT_ASSETS, ProjectAsset } from './ProjectData';
 import ProjectTable from './ProjectTable';
 import ProjectModal from './ProjectModal';
 
 export default function InvestmentPortfolioSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
   const [selectedAsset, setSelectedAsset] = useState<ProjectAsset | null>(null);
 
   return (
     <section
       id="projects-portfolio"
-      ref={sectionRef}
       className="w-full min-h-[85vh] pt-14 pb-28 px-4 sm:px-8 relative bg-[#050505] flex flex-col justify-center items-center z-40"
     >
       {/* 2-COLUMN PARALLEL LAYOUT: Heading & Overview (Left) | Project Stock Exchange Table (Right) */}
@@ -23,9 +20,9 @@ export default function InvestmentPortfolioSection() {
         
         {/* LEFT COLUMN: Heading & Executive Overview */}
         <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-          transition={{ duration: 0.7 }}
+          initial={{ opacity: 1, x: 0 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.3 }}
           className="lg:col-span-4 space-y-3 text-left"
         >
           {/* Bolder, Clean Non-Yellowish Heading Pill Badge */}
@@ -42,7 +39,7 @@ export default function InvestmentPortfolioSection() {
           </h2>
 
           {/* Compact Glassmorphic Market Legend Card */}
-          <div className="p-4 rounded-xl bg-[#050505] border border-white/15 backdrop-blur-md max-w-xs space-y-3 font-mono shadow-xl">
+          <div className="p-4 rounded-xl bg-[#050505] border border-white/15 max-w-xs space-y-3 font-mono shadow-xl">
             <div className="text-[10px] uppercase tracking-widest font-bold border-b border-white/10 pb-2 flex items-center justify-between">
               <span className="text-slate-200">MARKET LEGEND</span>
               <span className="text-gray-400">INDICATORS</span>
@@ -70,10 +67,10 @@ export default function InvestmentPortfolioSection() {
 
         {/* RIGHT COLUMN: Pure Dark Black Project Stock Market Dashboard Table (Parallel) */}
         <motion.div
-          className="lg:col-span-8 w-full flex flex-col relative z-10 overflow-hidden shadow-2xl shadow-black/80 bg-[#050505] backdrop-blur-md rounded-2xl border border-white/15"
-          initial={{ opacity: 0, x: 30 }}
-          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-          transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
+          className="lg:col-span-8 w-full flex flex-col relative z-10 overflow-hidden shadow-2xl shadow-black/80 bg-[#050505] rounded-2xl border border-white/15"
+          initial={{ opacity: 1, x: 0 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.3 }}
         >
           {/* Main Table Container */}
           <div className="w-full flex flex-col">

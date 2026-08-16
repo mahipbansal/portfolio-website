@@ -773,7 +773,7 @@ export default function PenguinCompanion() {
 
   return (
     <div
-      className="fixed inset-0 pointer-events-none z-[9998] overflow-hidden select-none"
+      className="fixed inset-0 pointer-events-none z-[9998] overflow-hidden select-none will-change-transform transform-gpu"
       style={{ width: '100vw', height: '100vh' }}
     >
       <canvas

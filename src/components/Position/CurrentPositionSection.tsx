@@ -137,9 +137,9 @@ export default function CurrentPositionSection() {
         
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: -15 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -15 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
+          initial={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
           className="text-center space-y-2"
         >
           {/* Heading Badge */}
@@ -185,7 +185,7 @@ export default function CurrentPositionSection() {
 
         {/* Pure Dark Black Executive Deck Container */}
         <div
-          className="relative w-full max-w-2xl sm:max-w-3xl mx-auto rounded-2xl bg-[#050505] border-2 border-white/20 hover:border-white/40 backdrop-blur-xl pt-5 px-6 pb-3 sm:pt-6 sm:px-7 sm:pb-3.5 shadow-2xl min-h-[200px] flex flex-col justify-between overflow-hidden transition-all duration-300"
+          className="relative w-full max-w-2xl sm:max-w-3xl mx-auto rounded-2xl bg-[#050505] border-2 border-white/20 hover:border-white/40 pt-5 px-6 pb-3 sm:pt-6 sm:px-7 sm:pb-3.5 shadow-2xl min-h-[200px] flex flex-col justify-between overflow-hidden transition-all duration-300"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >

@@ -30,10 +30,8 @@ export default function StockRow({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay }}
+      initial={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
       className="relative group border-b border-[#222] hover:border-[#D4AF37]/50 transition-colors"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

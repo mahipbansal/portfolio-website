@@ -170,10 +170,7 @@ export default function ContactCard({ card, index, onCustomClick }: ContactCardP
                 rotate: 360,
               }
             : {
-                x: index % 2 === 0 ? [-7, 5, -7] : [6, -6, 6],
-                y: [0, -7, 2, -7, 0],
-                rotate: index % 2 === 0 ? [-5, 5, -5] : [5, -5, 5],
-                scale: 1.0,
+                y: [0, -6, 0],
               }
         }
         transition={
@@ -185,13 +182,10 @@ export default function ContactCard({ card, index, onCustomClick }: ContactCardP
                 rotate: { repeat: Infinity, duration: 4, ease: 'linear' },
               }
             : {
-                x: { duration: 3.8, repeat: Infinity, ease: 'easeInOut', delay: index * 0.4 },
-                y: { duration: 4.2, repeat: Infinity, ease: 'easeInOut', delay: index * 0.4 },
-                rotate: { duration: 4.0, repeat: Infinity, ease: 'easeInOut', delay: index * 0.4 },
-                scale: { duration: 0.3, ease: 'easeOut' },
+                y: { duration: 3.2, repeat: Infinity, ease: 'easeInOut', delay: index * 0.3 },
               }
         }
-        className="flex items-center justify-center relative"
+        className="flex items-center justify-center relative will-change-transform transform-gpu"
       >
         {getIcon()}
 

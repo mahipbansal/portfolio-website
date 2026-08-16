@@ -129,9 +129,9 @@ export default function ExecutiveBoardroomContactSection() {
       <div className="w-full max-w-7xl mx-auto flex-1 flex flex-col justify-between space-y-10 relative z-10">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
+          initial={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
           className="space-y-1.5 text-left"
         >
           <div className="flex items-center space-x-2">

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import {
   Sparkles,
   Terminal,
@@ -127,7 +127,11 @@ const DP_NODES: DPStateNode[] = [
 ];
 
 export default function UnifiedAboutSection() {
-  const [activeNode, setActiveNode] = useState<DPStateNode>(DP_NODES[5]);
+  const sectionRef = React.useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: '-50px' });
+  const hasStartedRef = React.useRef(false);
+
+  const [activeNode, setActiveNode] = useState<DPStateNode>(DP_NODES[0]);
   const [isExecuting, setIsExecuting] = useState<boolean>(false);
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [computedStep, setComputedStep] = useState<number>(-1);
@@ -282,11 +286,14 @@ export default function UnifiedAboutSection() {
   };
 
   React.useEffect(() => {
-    startLoopSequence();
+    if (isInView && !hasStartedRef.current) {
+      hasStartedRef.current = true;
+      startLoopSequence();
+    }
     return () => {
       clearAllTimers();
     };
-  }, []);
+  }, [isInView]);
 
   const togglePlayPause = () => {
     if (isPaused) {
@@ -326,15 +333,14 @@ export default function UnifiedAboutSection() {
   return (
     <section
       id="about"
+      ref={sectionRef}
       className="w-full min-h-screen pt-14 pb-28 px-4 sm:px-8 relative overflow-hidden bg-[#050505] flex flex-col justify-center items-center z-20 select-none"
     >
       <div className="max-w-7xl w-full mx-auto z-10 relative">
         
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          initial={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
           className="w-full flex flex-col space-y-4 font-mono"
         >
           <div className="w-full relative flex flex-col space-y-4">

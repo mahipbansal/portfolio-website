@@ -46,10 +46,8 @@ export default function ProjectRow({ asset, onSelect, delay }: ProjectRowProps) 
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay }}
+      initial={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
       className={`relative group border-b border-[#222] transition-colors ${
         isFuture ? 'cursor-default opacity-85' : 'hover:border-[#D4AF37]/50 cursor-pointer'
       }`}
